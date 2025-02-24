@@ -26,6 +26,15 @@ filtered_df = df[
     (df["distance_to_pratunam"] <= max_distance)
 ]
 
+# Sorting Options
+st.sidebar.header("Sort Options")
+sort_column = st.sidebar.selectbox("Sort by", ["bedroom", "reviewer", "price_in_IDR", "distance_to_pratunam"], index=2)  # Default to "price_in_IDR"
+sort_order = st.sidebar.radio("Order", ["Ascending", "Descending"], index=0)  # Default to "Ascending"
+
+# Apply Sorting
+ascending_order = True if sort_order == "Ascending" else False
+filtered_df = filtered_df.sort_values(by=sort_column, ascending=ascending_order)
+
 # Display Results
 st.title("🏡 Airbnb Selection Dashboard")
 st.write(f"Showing {len(filtered_df)} results")
